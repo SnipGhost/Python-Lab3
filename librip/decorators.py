@@ -35,3 +35,18 @@
 # test_4
 # 1
 # 2
+
+
+def print_result(foo):
+    def wrapper(*args, **kwargs):
+        res = foo(*args, **kwargs)
+        print('Called:', foo.__name__)
+        if type(res) == list:
+            for val in res:
+                print(val)
+        elif type(res) == dict:
+            for key, val in res.items():
+                print(key, '=', val)
+        else:
+            print(res)
+    return wrapper
