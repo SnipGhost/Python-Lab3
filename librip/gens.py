@@ -1,4 +1,4 @@
-import random
+from random import randint
 
 
 # Генератор вычленения полей из массива словарей
@@ -12,13 +12,15 @@ import random
 
 def field(items, *args):
     assert len(args) > 0
-    # Необходимо реализовать генератор 
+    for item in items:
+        (len(args) > 1 or item[args[0]] is not None) and (yield {arg: item[arg] for arg in args if item[arg] is not None} if len(args) > 1 else item[args[0]])
 
 
 # Генератор списка случайных чисел
 # Пример:
 # gen_random(1, 3, 5) должен выдать примерно 2, 2, 3, 2, 1
 # Hint: реализация занимает 2 строки
+
 def gen_random(begin, end, num_count):
-    pass
-    # Необходимо реализовать генератор
+    for _ in range(num_count):
+        yield randint(begin, end)
