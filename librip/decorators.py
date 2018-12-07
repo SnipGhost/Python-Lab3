@@ -40,13 +40,12 @@
 def print_result(foo):
     def wrapper(*args, **kwargs):
         res = foo(*args, **kwargs)
-        print('Called:', foo.__name__)
         if type(res) == list:
-            for val in res:
-                print(val)
+            data = '\n'.join(map(lambda x: str(x), res))
         elif type(res) == dict:
-            for key, val in res.items():
-                print(key, '=', val)
+            data = '\n'.join(['{} = {}'.format(k, v) for k, v in res.items()])
         else:
-            print(res)
+            data = str(res)
+        print('Called:', foo.__name__, '\n' + data)
+        return res
     return wrapper
